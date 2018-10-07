@@ -1,7 +1,12 @@
+import requests
 from django.shortcuts import render
 
-from django.http  import HttpResponse
 
-# Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to the Moringa Tribune')
+def index(request):
+    
+    url='http://api.worldbank.org/v2/datacatalog?format=json'
+    res=requests.get(url.format()).json()
+    print(res)
+    context={'res':res}
+
+    return render(request,'all/index.html',context)
